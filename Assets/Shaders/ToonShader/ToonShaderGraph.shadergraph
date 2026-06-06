@@ -1515,7 +1515,7 @@
     "m_Title": "Cel Shading Lighting",
     "m_Position": {
         "x": -2242.0,
-        "y": -125.00001525878906
+        "y": -125.0
     }
 }
 
@@ -2055,8 +2055,8 @@
     "m_ObjectId": "4e39a22aff7c49d39cfff6c2db1fae98",
     "m_Title": "Ambient Lighting",
     "m_Position": {
-        "x": -1343.0001220703125,
-        "y": 227.00003051757813
+        "x": -1343.0,
+        "y": 227.0
     }
 }
 
@@ -2806,7 +2806,7 @@
     "m_Title": "Base Color & Texture",
     "m_Position": {
         "x": -367.0,
-        "y": 230.00003051757813
+        "y": 230.0
     }
 }
 
@@ -4221,15 +4221,15 @@
     "m_Group": {
         "m_Id": "2d783fc5c81c4b34a55e24ad06e3f7d0"
     },
-    "m_Name": "LightingCelShaded (Custom Function)",
+    "m_Name": "LightingToonShaded (Custom Function)",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1745.0,
-            "y": 288.9999694824219,
-            "width": 293.0,
-            "height": 454.0000305175781
+            "x": -1749.0,
+            "y": 288.0,
+            "width": 295.0,
+            "height": 406.0
         }
     },
     "m_Slots": [
@@ -4291,7 +4291,7 @@
         "m_SerializableColors": []
     },
     "m_SourceType": 0,
-    "m_FunctionName": "LightingCelShaded",
+    "m_FunctionName": "LightingToonShaded",
     "m_FunctionSource": "cde4976ed1596134c9a1076d8c46daa1",
     "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "Enter function body here..."

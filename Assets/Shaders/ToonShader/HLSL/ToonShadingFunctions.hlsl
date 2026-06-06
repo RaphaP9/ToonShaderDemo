@@ -5,8 +5,8 @@
 #pragma multi_compile _ _ADDITIONAL_LIGHTS
 #pragma multi_compile _ _ADDITIONAL_LIGHT_SHADOWS
 
-#ifndef CEL_SHADING_FUNCTIONS
-#define CEL_SHADING_FUNCTIONS
+#ifndef TOON_SHADING_FUNCTIONS
+#define TOON_SHADING_FUNCTIONS
 
 #ifndef SHADERGRAPH_PREVIEW
 struct SurfaceVariables
@@ -48,7 +48,7 @@ float CalculateRim(float3 viewDirection, float3 surfaceNormal, float diffuse, fl
         return 0;
     
     float primitiveRim = 1 - saturate(dot(viewDirection, surfaceNormal));     
-    primitiveRim = pow(primitiveRim, rimPower);
+    primitiveRim = pow(abs(primitiveRim), rimPower);
     primitiveRim *= lerp(1.0, diffuse, rimCurveFactor); 
     
     float rim = step(threshold, primitiveRim) * intensity; 
@@ -74,7 +74,7 @@ float3 CalculateCelShading(Light l, SurfaceVariables s, float diffuseIntensity, 
     float rim = CalculateRim(s.view, s.normal, diffuse, attenuation, s.rimThreshold, s.rimIntensity, s.rimPower, s.rimCurveFactor);
     
     float addOn = max(specular, rim);
-    lighting += addOn; //Add to the bandedLighting
+    lighting += addOn;
     
     lighting = pow(abs(lighting), s.powerShift); 
     
@@ -82,7 +82,7 @@ float3 CalculateCelShading(Light l, SurfaceVariables s, float diffuseIntensity, 
 }
 #endif
 
-void LightingCelShaded_float(
+void LightingToonShaded_float(
     float3 Position,
     float3 Normal,
     float3 View,
