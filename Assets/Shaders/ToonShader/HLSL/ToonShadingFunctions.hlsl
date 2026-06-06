@@ -14,7 +14,6 @@ struct SurfaceVariables
     float3 normal;
     float3 view;
     float diffuseLightingOffset;
-    float powerShift;
     float specularThreshold;
     float specularIntensity;
     float rimThreshold;
@@ -23,7 +22,7 @@ struct SurfaceVariables
     float rimCurveFactor;
 };
 
-float CalculateSpecular(float3 lightDirection, float3 viewDirection, float3 surfaceNormal, float diffuse, float attenuation, float threshold, float intensity)
+float CalculateSpecular(float3 lightDirection, float3 viewDirection, float3 surfaceNormal, float diffuse, float threshold, float intensity)
 {
     if (intensity <= 0)
         return 0;
@@ -40,7 +39,7 @@ float CalculateSpecular(float3 lightDirection, float3 viewDirection, float3 surf
     return specular;
 }
 
-float CalculateRim(float3 viewDirection, float3 surfaceNormal, float diffuse, float attenuation, float threshold, float intensity, float rimPower, float rimCurveFactor)
+float CalculateRim(float3 viewDirection, float3 surfaceNormal, float diffuse, float threshold, float intensity, float rimPower, float rimCurveFactor)
 {
     if (intensity <= 0)
         return 0;
@@ -58,7 +57,7 @@ float CalculateRim(float3 viewDirection, float3 surfaceNormal, float diffuse, fl
     return rim;
 }
 
-float3 CalculateCelShading(Light l, SurfaceVariables s, float diffuseIntensity, float minimumLight)
+float3 CalculateToonShading(Light l, SurfaceVariables s, float minimumLight)
 {
     float diffuse = saturate(dot(s.normal, l.direction) + s.diffuseLightingOffset);
     float attenuation = l.distanceAttenuation * l.shadowAttenuation;  
@@ -68,15 +67,12 @@ float3 CalculateCelShading(Light l, SurfaceVariables s, float diffuseIntensity, 
     
     float lighting = step(0.0001, diffuse); 
     lighting = clamp(lighting, minimumLight, 1.0);
-    lighting *= diffuseIntensity;
 
-    float specular = CalculateSpecular(l.direction, s.view, s.normal, diffuse, attenuation, s.specularThreshold, s.specularIntensity);
-    float rim = CalculateRim(s.view, s.normal, diffuse, attenuation, s.rimThreshold, s.rimIntensity, s.rimPower, s.rimCurveFactor);
+    float specular = CalculateSpecular(l.direction, s.view, s.normal, diffuse, s.specularThreshold, s.specularIntensity);
+    float rim = CalculateRim(s.view, s.normal, diffuse, s.rimThreshold, s.rimIntensity, s.rimPower, s.rimCurveFactor);
     
-    float addOn = max(specular, rim);
+    float addOn = max(specular , rim);
     lighting += addOn;
-    
-    lighting = pow(abs(lighting), s.powerShift); 
     
     return l.color * lighting;
 }
@@ -86,11 +82,8 @@ void LightingToonShaded_float(
     float3 Position,
     float3 Normal,
     float3 View,
-    float DiffuseMainLightIntensity,
-    float DiffuseAdditionalLightsIntensity,
     float DiffuseLightingOffset,
     float MinimumDiffuseMainLight,
-    float PowerShift,
     float SpecularThreshold,
     float SpecularIntensity,
     float RimThreshold,
@@ -107,7 +100,6 @@ void LightingToonShaded_float(
     s.normal = normalize(Normal);
     s.view = SafeNormalize(View);
     s.diffuseLightingOffset = DiffuseLightingOffset;
-    s.powerShift = PowerShift;
     s.specularThreshold = SpecularThreshold;
     s.specularIntensity = SpecularIntensity;
     s.rimThreshold = RimThreshold;
@@ -132,7 +124,7 @@ void LightingToonShaded_float(
             mainLight = GetMainLight();
         #endif
         
-        Color += CalculateCelShading(mainLight, s, DiffuseMainLightIntensity, MinimumDiffuseMainLight);
+        Color += CalculateToonShading(mainLight, s, MinimumDiffuseMainLight);
     
 #endif
     
@@ -149,7 +141,7 @@ void LightingToonShaded_float(
         #endif
 
         
-        Color += CalculateCelShading(additionalLight, s, DiffuseAdditionalLightsIntensity, 0);
+        Color += CalculateToonShading(additionalLight, s, 0);
     }
 
 #endif

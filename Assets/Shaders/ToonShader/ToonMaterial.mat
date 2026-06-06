@@ -40,7 +40,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2000
   stringTagMap:
     RenderType: Opaque
   disabledShaderPasses:
@@ -140,7 +140,7 @@ Material:
     - _DiffuseAdditionalLightsIntensity: 1
     - _DiffuseLightingIntensity: 0.5
     - _DiffuseLightingOffset: 0
-    - _DiffuseMainLightIntensity: 0.3
+    - _DiffuseMainLightIntensity: 1
     - _DistanceAttenFadeThreshold: 0.075
     - _DstBlend: 0
     - _DstBlendAlpha: 0
@@ -160,7 +160,7 @@ Material:
     - _MAIN_LIGHT_SHADOWS_CASCADE: 1
     - _Metallic: 0
     - _MinimumAdditionalLight: 0.1
-    - _MinimumDiffuseMainLight: 0.1
+    - _MinimumDiffuseMainLight: 0.2
     - _MinimumLight: 0.01
     - _MinimumMainLight: 0.2
     - _OcclusionStrength: 1
@@ -184,8 +184,8 @@ Material:
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SpecularIntensity: 1
-    - _SpecularThreshold: 0.975
+    - _SpecularIntensity: 5
+    - _SpecularThreshold: 0.95
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
