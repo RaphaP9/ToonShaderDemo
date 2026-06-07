@@ -1383,8 +1383,8 @@
     "m_ObjectId": "2d783fc5c81c4b34a55e24ad06e3f7d0",
     "m_Title": "Cel Shading Lighting",
     "m_Position": {
-        "x": -2236.000244140625,
-        "y": -125.00001525878906
+        "x": -2236.0,
+        "y": -125.0
     }
 }
 
@@ -1894,8 +1894,8 @@
     "m_ObjectId": "4e39a22aff7c49d39cfff6c2db1fae98",
     "m_Title": "Ambient Lighting",
     "m_Position": {
-        "x": -1343.0001220703125,
-        "y": 227.00003051757813
+        "x": -1343.0,
+        "y": 227.00010681152345
     }
 }
 
@@ -2569,8 +2569,8 @@
     "m_ObjectId": "7fb26d5cca1a4933b7f2922941252863",
     "m_Title": "Base Color & Texture",
     "m_Position": {
-        "x": -367.0000305175781,
-        "y": 230.0000457763672
+        "x": -367.0,
+        "y": 230.00010681152345
     }
 }
 

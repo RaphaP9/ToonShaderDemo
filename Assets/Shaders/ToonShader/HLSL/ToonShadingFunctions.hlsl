@@ -32,7 +32,8 @@ float CalculateSpecular(float3 lightDirection, float3 viewDirection, float3 surf
     float3 halfVector = SafeNormalize(lightDirection + viewDirection);
     float primitiveSpecular = saturate(dot(surfaceNormal, halfVector));
     
-    float specular = step(threshold, primitiveSpecular) * intensity; 
+    float specular = step(threshold, primitiveSpecular);
+    specular *= pow(intensity, 2);
     
     specular *= (diffuse > 0); 
     
@@ -50,8 +51,9 @@ float CalculateRim(float3 viewDirection, float3 surfaceNormal, float diffuse, fl
     primitiveRim = pow(abs(primitiveRim), rimPower);
     primitiveRim *= lerp(1.0, diffuse, rimCurveFactor); 
     
-    float rim = step(threshold, primitiveRim) * intensity; 
-
+    float rim = step(threshold, primitiveRim); 
+    rim *= pow(intensity, 2);
+    
     rim *= (diffuse > 0);
     
     return rim;
