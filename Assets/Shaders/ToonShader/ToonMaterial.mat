@@ -160,7 +160,7 @@ Material:
     - _MAIN_LIGHT_SHADOWS_CASCADE: 1
     - _Metallic: 0
     - _MinimumAdditionalLight: 0.1
-    - _MinimumDiffuseMainLight: 0.2
+    - _MinimumDiffuseMainLight: 0.05
     - _MinimumLight: 0.01
     - _MinimumMainLight: 0.2
     - _OcclusionStrength: 1
